@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="vi" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>So Sánh Lãi Suất Vay & Dịch Vụ - Agribank</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        
+        @media print {
+            .no-print { display: none !important; }
+            .page-break { page-break-before: always !important; break-before: page !important; display: block; clear: both; }
+        }
+        .page-break {
+            page-break-before: always;
+            break-before: page;
+        }
+
+        .pdf-header-container {
+            display: none;
+        }
+
+        .pdf-export-mode .pdf-header-container {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            margin-bottom: 1rem !important;
+            text-align: center !important;
+        }
+        /* Dòng đầu tiên nhỏ hơn 5pt so với dòng thứ 2 */
+        .pdf-export-mode .pdf-header-title-main {
+            font-size: calc(0.75rem + 5pt) !important;
+            color: #8E1B2D !important;
+            font-weight: 800 !important;
+            letter-spacing: 0.02em !important;
+            white-space: nowrap !important;
+            line-height: 1.2 !important;
+            margin-bottom: 0.15rem !important;
+        }
+        /* Dòng thứ hai giữ nguyên cỡ chữ lớn (+10pt) */
+        .pdf-export-mode .pdf-header-title-sub {
+            font-size: calc(0.75rem + 10pt) !important;
+            color: #8E1B2D !important;
+            font-weight: 700 !important;
+            letter-spacing: 0.03em !important;
+            white-space: nowrap !important;
+            line-height: 1.2 !important;
+        }
+
+        .pdf-export-mode h1 { font-size: calc(1.25rem + 4pt) !important; }
+        .pdf-export-mode h2 { font-size: calc(1rem + 4pt) !important; }
+        .pdf-export-mode h3 { font-size: calc(1.125rem + 4pt) !important; }
+        .pdf-export-mode h4 { font-size: calc(0.875rem + 4pt) !important; }
+        .pdf-export-mode p, 
+        .pdf-export-mode span, 
+        .pdf-export-mode label, 
+        .pdf-export-mode input, 
+        .pdf-export-mode select, 
+        .pdf-export-mode td, 
+        .pdf-export-mode th {
+            font-size: calc(0.875rem + 4pt) !important;
+        }
+        .pdf-export-mode .text-xs { font-size: calc(0.75rem + 4pt) !important; }
+        .pdf-export-mode .text-sm { font-size: calc(0.875rem + 4pt) !important; }
+        .pdf-export-mode .text-base { font-size: calc(1rem + 4pt) !important; }
+        .pdf-export-mode .text-lg { font-size: calc(1.125rem + 4pt) !important; }
+        .pdf-export-mode .text-xl { font-size: calc(1.25rem + 4pt) !important; }
+        .pdf-export-mode .text-\[10px\] { font-size: calc(10px + 4pt) !important; }
+        .pdf-export-mode .text-\[11px\] { font-size: calc(11px + 4pt) !important; }
+
+        .pdf-export-mode {
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+        }
+        .pdf-export-mode .p-5, 
+        .pdf-export-mode .p-6 {
+            padding: 0.75rem 1rem !important;
+        }
+        .pdf-export-mode .space-y-6 > :not([hidden]) ~ :not([hidden]) {
+            margin-top: 0.875rem !important;
+        }
+        .pdf-export-mode .space-y-5 > :not([hidden]) ~ :not([hidden]) {
+            margin-top: 0.75rem !important;
+        }
+        .pdf-export-mode .mb-4 {
+            margin-bottom: 0.375rem !important;
+        }
+
+        .pdf-export-mode #totalSavingsBadge {
+            font-size: calc(1.125rem + 8pt) !important;
+            color: #ff0000 !important;
+            font-weight: 800 !important;
+            background-color: #ffffff !important;
+            border: 2px solid #ffffff !important;
+            border-radius: 8px !important;
+            padding: 2px 10px !important;
+            display: inline-block !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 antialiased min-h-full flex flex-col">
+
+    <header class="bg-gradient-to-r from-[#800000] via-[#A6192E] to-[#006837] text-white shadow-lg no-print">
+        <div class="max-w-7xl mx-auto px-4 py-3.5 flex flex-col md:flex-row justify-between items-center">
+            <div class="flex items-center space-x-3 mb-2 md:mb-0">
+                <div class="bg-white/15 p-2.5 rounded-xl border border-white/25 shadow-inner">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-base md:text-xl font-bold tracking-tight">CÔNG CỤ SO SÁNH LÃI SUẤT VAY & DỊCH VỤ - AGRIBANK</h1>
+                    <p class="text-xs text-emerald-100">Giải pháp tư vấn phương án tài chính toàn diện và tối ưu nhất cho Khách hàng</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-2">
+                <span id="currentDateBadge" class="text-xs bg-white/20 text-white px-3.5 py-1.5 rounded-full border border-white/30 font-medium"></span>
+            </div>
+        </div>
+    </header>
+
+    <main id="pdfExportContainer" class="max-w-7xl mx-auto px-4 py-6 flex-grow w-full grid grid-cols-1 lg:grid-cols-12 gap-6 bg-slate-100 transition-all">
+        
+        <!-- Khối tiêu đề xuất hiện trên đầu trang PDF với 2 dấu xuống dòng trước dòng đầu tiên -->
+        <div class="lg:col-span-12 pdf-header-container">
+            <br><br>
+            <div class="pdf-header-title-main">NGÂN HÀNG NÔNG NGHIỆP VÀ PHÁT TRIỂN NÔNG THÔN VIỆT NAM</div>
+            <div class="pdf-header-title-sub">CHI NHÁNH TUYÊN QUANG</div>
+        </div>
+
+        <section class="lg:col-span-5 space-y-5">
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 p-5 md:p-6">
+                <h2 class="text-base font-bold text-slate-900 border-b border-slate-100 pb-3 mb-4 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-red-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                    </svg>
+                    Thông Tin Khoản Vay & Lãi Suất
+                </h2>
+
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Họ và tên khách hàng</label>
+                        <input type="text" id="clientName" value="Nguyễn Văn A" oninput="calculateLoan()" class="w-full text-sm font-bold px-3 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none transition-all">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Số tiền vay (VNĐ)</label>
+                        <input type="text" id="loanAmount" value="500.000.000" oninput="formatCurrencyInput(this); calculateLoan();" class="w-full text-sm font-bold px-3 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none transition-all">
+                        <p id="loanAmountWords" class="text-xs text-slate-500 mt-1 italic font-medium"></p>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Thời hạn vay</label>
+                            <input type="number" id="loanTerm" value="12" min="1" max="360" oninput="calculateLoan()" class="w-full text-sm font-semibold px-3 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Đơn vị thời hạn</label>
+                            <select id="termUnit" onchange="calculateLoan()" class="w-full text-sm font-semibold px-3 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none bg-white transition-all">
+                                <option value="months" selected>Tháng</option>
+                                <option value="years">Năm</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Phương thức trả gốc</label>
+                        <select id="principalMethod" onchange="calculateLoan()" class="w-full text-sm font-semibold px-3 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none bg-white transition-all">
+                            <option value="auto" selected>Tự động (Năm &gt; 1 trả gốc theo năm; Khác trả cuối kỳ)</option>
+                            <option value="monthly">Trả gốc đều hàng tháng, lãi theo dư nợ</option>
+                            <option value="yearly">Trả gốc theo năm (chia đều từng năm), lãi hàng tháng</option>
+                            <option value="maturity">Trả gốc cuối kỳ, lãi hàng tháng</option>
+                        </select>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3 pt-2 border-t border-slate-100">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Lãi suất thông thường (%/năm)</label>
+                            <input type="number" id="baseRate" value="9.5" step="0.1" min="0" oninput="calculateLoan()" class="w-full text-sm font-semibold px-3 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-red-700 mb-1">Lãi suất ưu đãi (%/năm)</label>
+                            <input type="number" id="discountRate" value="8.0" step="0.1" min="0" oninput="calculateLoan()" class="w-full text-sm font-bold px-3 py-2.5 border border-red-300 bg-red-50/40 rounded-xl focus:ring-2 focus:ring-red-500 focus:outline-none transition-all">
+                            <p class="text-[11px] text-slate-500 italic mt-1 leading-tight">Áp dụng khi kèm gói dịch vụ</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="lg:col-span-7 space-y-5 w-full">
+            
+            <div id="pa1CardContainer" class="bg-white rounded-2xl shadow-sm border-2 border-slate-300 p-5 md:p-6 flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-center mb-3">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Phương án 1</h4>
+                        <span class="bg-slate-100 text-slate-700 text-xs font-semibold px-3 py-1 rounded-full">Không dùng dịch vụ</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-3">Lãi suất thông thường</h3>
+
+                    <div class="space-y-2.5 py-2.5 border-y border-slate-100 mb-4">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-slate-600 font-medium">Lãi suất áp dụng:</span>
+                            <span class="font-bold text-slate-900" id="pa1Rate">9.5% / năm</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-slate-600 font-medium">Tổng tiền lãi phải trả:</span>
+                            <span class="font-bold text-red-600" id="pa1TotalInterest">0 đ</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-slate-600 font-medium">Phí dịch vụ kèm theo:</span>
+                            <span class="font-semibold text-slate-900">0 đ</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 rounded-xl p-3.5 border border-slate-200/60 flex justify-between items-center">
+                    <div class="text-xs text-slate-600 font-semibold">Tổng gốc + Lãi + Phí:</div>
+                    <div class="text-base font-bold text-slate-900 text-right" id="pa1TotalPayment">0 đ</div>
+                </div>
+            </div>
+
+            <div class="page-break"></div>
+
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 p-5 md:p-6">
+                <div class="flex justify-between items-center border-b border-slate-100 pb-3 mb-3">
+                    <h2 class="text-base font-bold text-slate-900 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                        </svg>
+                        Phí Dịch Vụ Kèm Theo
+                    </h2>
+                    <span class="text-xs bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full font-bold">Tổng phí: <span id="totalServiceFeeDisplay">0</span>đ</span>
+                </div>
+                <p class="text-xs text-slate-500 mb-4 font-medium">Tích chọn và điều chỉnh số tiền các sản phẩm/dịch vụ phụ trợ kèm theo gói vay:</p>
+
+                <div class="space-y-3" id="serviceListContainer">
+                    <div class="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
+                        <div class="flex items-center space-x-3 flex-grow">
+                            <input type="checkbox" id="srv_0" checked onchange="calculateLoan()" class="w-4 h-4 text-red-600 rounded border-slate-300 focus:ring-red-500 cursor-pointer">
+                            <label for="srv_0" class="text-xs font-semibold text-slate-700 cursor-pointer">Bảo an chủ thẻ</label>
+                        </div>
+                        <div class="w-36">
+                            <input type="text" id="fee_0" value="18.000" oninput="formatCurrencyInput(this); calculateLoan();" class="text-xs font-semibold text-right w-full px-2.5 py-1.5 border border-slate-300 rounded-lg focus:ring-1 focus:ring-red-500">
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
+                        <div class="flex items-center space-x-3 flex-grow">
+                            <input type="checkbox" id="srv_1" checked onchange="calculateLoan()" class="w-4 h-4 text-red-600 rounded border-slate-300 focus:ring-red-500 cursor-pointer">
+                            <label for="srv_1" class="text-xs font-semibold text-slate-700 cursor-pointer">Bảo an tài khoản</label>
+                        </div>
+                        <div class="w-36">
+                            <input type="text" id="fee_1" value="77.000" oninput="formatCurrencyInput(this); calculateLoan();" class="text-xs font-semibold text-right w-full px-2.5 py-1.5 border border-slate-300 rounded-lg focus:ring-1 focus:ring-red-500">
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
+                        <div class="flex items-center space-x-3 flex-grow">
+                            <input type="checkbox" id="srv_2" checked onchange="calculateLoan()" class="w-4 h-4 text-red-600 rounded border-slate-300 focus:ring-red-500 cursor-pointer">
+                            <label for="srv_2" class="text-xs font-semibold text-slate-700 cursor-pointer">Bảo an tín dụng</label>
+                        </div>
+                        <div class="w-36">
+                            <input type="text" id="fee_2" value="1.000.000" oninput="formatCurrencyInput(this); calculateLoan();" class="text-xs font-semibold text-right w-full px-2.5 py-1.5 border border-slate-300 rounded-lg focus:ring-1 focus:ring-red-500">
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
+                        <div class="flex items-center space-x-3 flex-grow">
+                            <input type="checkbox" id="srv_3" checked onchange="calculateLoan()" class="w-4 h-4 text-red-600 rounded border-slate-300 focus:ring-red-500 cursor-pointer">
+                            <label for="srv_3" class="text-xs font-semibold text-slate-700 cursor-pointer">Tài khoản số đẹp</label>
+                        </div>
+                        <div class="w-36">
+                            <input type="text" id="fee_3" value="1.000.000" oninput="formatCurrencyInput(this); calculateLoan();" class="text-xs font-semibold text-right w-full px-2.5 py-1.5 border border-slate-300 rounded-lg focus:ring-1 focus:ring-red-500">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4 pt-3 border-t border-slate-100 no-print">
+                    <button type="button" onclick="toggleAddServiceForm()" id="toggleAddBtn" class="text-xs text-red-700 font-bold hover:underline flex items-center cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
+                        Thêm dịch vụ khác tùy chọn...
+                    </button>
+                    <div id="addServiceForm" class="hidden mt-3 flex gap-2">
+                        <input type="text" id="newServiceName" placeholder="Tên dịch vụ mới..." class="text-xs px-3 py-2 border border-slate-300 rounded-xl flex-grow focus:outline-none focus:ring-1 focus:ring-red-500">
+                        <input type="text" id="newServiceFee" placeholder="Số tiền (đ)" value="0" oninput="formatCurrencyInput(this)" class="text-xs px-3 py-2 border border-slate-300 rounded-xl w-32 text-right focus:outline-none focus:ring-1 focus:ring-red-500">
+                        <button type="button" onclick="addCustomService()" class="bg-red-700 hover:bg-red-800 text-white text-xs px-4 py-2 rounded-xl font-bold transition-colors cursor-pointer shadow-sm">Thêm</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm border-2 border-red-600 p-5 md:p-6 pt-7 flex flex-col justify-between relative mt-5">
+                <div class="absolute -top-3.5 left-1/2 transform -translate-x-1/2 bg-red-600 text-white text-[10px] font-bold px-3.5 py-1 rounded-full uppercase tracking-wider shadow-sm z-10">
+                    Khuyên dùng
+                </div>
+                <div class="pt-1">
+                    <div class="flex justify-between items-center mb-3">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-red-600">Phương án 2</h4>
+                        <span class="bg-red-50 text-red-700 text-xs font-semibold px-3 py-1 rounded-full">Sử dụng dịch vụ kèm theo</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-red-900 mb-3">Lãi suất ưu đãi</h3>
+
+                    <div class="space-y-2.5 py-2.5 border-y border-slate-100 mb-4">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-slate-600 font-medium">Lãi suất áp dụng:</span>
+                            <span class="font-bold text-red-600" id="pa2Rate">8.0% / năm</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-slate-600 font-medium">Tổng tiền lãi phải trả:</span>
+                            <span class="font-bold text-emerald-600" id="pa2TotalInterest">0 đ</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-slate-600 font-medium">Tổng phí dịch vụ:</span>
+                            <span class="font-semibold text-slate-900" id="pa2ServiceFee">0 đ</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-red-50/60 rounded-xl p-3.5 border border-red-100 flex justify-between items-center">
+                    <div class="text-xs text-red-800 font-semibold">Tổng gốc + Lãi + Phí:</div>
+                    <div class="text-base font-bold text-red-900 text-right" id="pa2TotalPayment">0 đ</div>
+                </div>
+            </div>
+
+            <div id="savingsBannerBox" class="bg-gradient-to-r from-emerald-600 via-teal-700 to-emerald-800 rounded-2xl shadow-md p-6 text-white relative overflow-hidden">
+                <div class="absolute -right-6 -bottom-6 opacity-10">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-40 w-40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <div class="relative z-10">
+                    <h3 class="text-sm font-medium text-white leading-relaxed">
+                        <span class="font-extrabold tracking-wide uppercase text-emerald-100">KẾT LUẬN:</span> Lựa chọn phương án vay có sử dụng kèm các dịch vụ của Agribank, KH sẽ <span class="font-bold underline text-white">CÓ LỢI HƠN</span> do được hưởng chính sách ưu đãi về lãi suất. Số tiền khách hàng <span class="font-bold underline text-white">TIẾT KIỆM</span> được là:
+                    </h3>
+                    <div class="flex items-baseline space-x-2 my-2">
+                        <span id="totalSavingsBadge" class="text-base md:text-lg font-extrabold tracking-tight text-white">0 đ</span>
+                        <span class="text-xs text-emerald-200 font-medium" id="savingsSubtitle">(Đã trừ tổng chi phí dịch vụ kèm theo)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="no-print pt-2 space-y-3">
+                <div class="bg-white p-3.5 rounded-xl border border-slate-200/80 shadow-sm flex items-center justify-between">
+                    <label class="flex items-center space-x-2.5 text-xs font-bold text-slate-700 cursor-pointer hover:text-red-700 transition-colors">
+                        <input type="checkbox" id="includeScheduleCheckbox" checked class="w-4 h-4 text-red-600 rounded border-slate-300 focus:ring-red-500 cursor-pointer">
+                        <span>Xuất cả lịch trả nợ</span>
+                    </label>
+                </div>
+
+                <button id="exportPdfBtn" type="button" onclick="exportToPDF()" class="w-full bg-slate-900 hover:bg-black text-white text-sm font-bold py-3.5 px-4 rounded-xl shadow-md transition-all flex items-center justify-center cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    Xuất ra file PDF
+                </button>
+            </div>
+
+            <div id="scheduleCard" class="bg-white rounded-2xl shadow-sm border border-slate-200/80 p-5 md:p-6">
+                <div class="flex justify-between items-center mb-3">
+                    <h4 class="text-sm font-bold text-slate-900">Lịch trả nợ chi tiết từng kỳ</h4>
+                    <span class="text-xs text-slate-500 font-semibold">Đơn vị: VNĐ</span>
+                </div>
+                <div id="scheduleTableWrapper" class="overflow-x-auto max-h-96 border border-slate-200 rounded-xl transition-all">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead class="bg-slate-100 sticky top-0 text-slate-700 font-bold z-10 shadow-sm">
+                            <tr>
+                                <th class="p-3">Kỳ</th>
+                                <th class="p-3">Gốc phải trả</th>
+                                <th class="p-3">Lãi PA1</th>
+                                <th class="p-3">Lãi PA2</th>
+                                <th class="p-3 text-right">Tiết kiệm kỳ</th>
+                            </tr>
+                        </thead>
+                        <tbody id="scheduleTableBody" class="divide-y divide-slate-100 font-medium">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer class="text-center py-6 text-xs text-slate-500 border-t border-slate-200 mt-auto no-print">
+        <p class="font-medium">Công cụ hỗ trợ tính toán tài chính nội bộ dành cho Cán bộ ngân hàng • Bảo mật thông tin khách hàng tuyệt đối.</p>
+    </footer>
+
+    <script>
+        function formatNumber(num) {
+            if (isNaN(num)) return "0";
+            return Math.round(num).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+
+        function numberToWords(number) {
+            if (number === 0) return "Không đồng";
+            if (number >= 1000000000) {
+                return (number / 1000000000).toFixed(1).replace('.', ',') + " tỷ đồng";
+            } else if (number >= 1000000) {
+                return (number / 1000000).toFixed(1).replace('.', ',') + " triệu đồng";
+            }
+            return formatNumber(number) + " đồng";
+        }
+
+        function formatCurrencyInput(input) {
+            let value = input.value.replace(/\D/g, "");
+            if (value === "") {
+                input.value = "";
+                return;
+            }
+            input.value = formatNumber(parseInt(value));
+        }
+
+        function parseCurrency(value) {
+            if (!value) return 0;
+            return parseInt(value.toString().replace(/\./g, "")) || 0;
+        }
+
+        function toggleAddServiceForm() {
+            const form = document.getElementById('addServiceForm');
+            const btn = document.getElementById('toggleAddBtn');
+            if (form.classList.contains('hidden')) {
+                form.classList.remove('hidden');
+                btn.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
+                    </svg>
+                    Ẩn bớt mục thêm dịch vụ
+                `;
+            } else {
+                form.classList.add('hidden');
+                btn.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                    </svg>
+                    Thêm dịch vụ khác tùy chọn...
+                `;
+            }
+        }
+
+        function addCustomService() {
+            const nameInput = document.getElementById('newServiceName');
+            const feeInput = document.getElementById('newServiceFee');
+            
+            const name = nameInput.value.trim();
+            const fee = parseCurrency(feeInput.value);
+
+            if (!name) return;
+
+            const container = document.getElementById('serviceListContainer');
+            const index = container.children.length;
+
+            const div = document.createElement('div');
+            div.className = "flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200";
+            div.innerHTML = `
+                <div class="flex items-center space-x-3 flex-grow">
+                    <input type="checkbox" id="srv_${index}" checked onchange="calculateLoan()" class="w-4 h-4 text-red-600 rounded border-slate-300 focus:ring-red-500 cursor-pointer">
+                    <label for="srv_${index}" class="text-xs font-semibold text-slate-700 cursor-pointer">${name}</label>
+                </div>
+                <div class="w-36">
+                    <input type="text" id="fee_${index}" value="${formatNumber(fee)}" oninput="formatCurrencyInput(this); calculateLoan();" class="text-xs font-semibold text-right w-full px-2.5 py-1.5 border border-slate-300 rounded-lg focus:ring-1 focus:ring-red-500">
+                </div>
+            `;
+            container.appendChild(div);
+
+            nameInput.value = "";
+            feeInput.value = "0";
+            calculateLoan();
+        }
+
+        function exportToPDF() {
+            const clientNameInput = document.getElementById('clientName');
+            const clientName = clientNameInput ? clientNameInput.value.trim() : 'KhachHang';
+            const element = document.getElementById('pdfExportContainer');
+            const tableWrapper = document.getElementById('scheduleTableWrapper');
+            const exportBtn = document.getElementById('exportPdfBtn');
+            const exportBtnContainer = exportBtn ? exportBtn.parentElement : null;
+            const addServiceForm = document.getElementById('addServiceForm');
+            const newServiceName = document.getElementById('newServiceName');
+            
+            const includeSchedule = document.getElementById('includeScheduleCheckbox')?.checked ?? true;
+            const scheduleCard = document.getElementById('scheduleCard');
+
+            if (exportBtnContainer) {
+                exportBtnContainer.style.display = 'none';
+                exportBtnContainer.setAttribute('hidden', '');
+                exportBtnContainer.classList.add('hidden');
+            }
+
+            if (addServiceForm && newServiceName && newServiceName.value.trim() === '') {
+                addServiceForm.classList.add('hidden');
+                addServiceForm.setAttribute('hidden', '');
+            }
+
+            if (!includeSchedule) {
+                if (scheduleCard) {
+                    scheduleCard.style.display = 'none';
+                    scheduleCard.setAttribute('hidden', '');
+                    scheduleCard.classList.add('hidden');
+                    scheduleCard.classList.remove('page-break');
+                }
+            } else {
+                if (scheduleCard) {
+                    scheduleCard.style.display = '';
+                    scheduleCard.removeAttribute('hidden');
+                    scheduleCard.classList.remove('hidden');
+                    scheduleCard.classList.add('page-break');
+                }
+            }
+
+            tableWrapper.classList.remove('max-h-96');
+            element.classList.add('pdf-export-mode');
+
+            const opt = {
+                margin:       [20, 10, 8, 10], // Lề trên 2cm (~20mm)
+                filename:     `BaoCao_PhuongAn_VayVon_${clientName.replace(/\s+/g, '_')}.pdf`,
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { 
+                    scale: 2, 
+                    useCORS: true, 
+                    logging: false, 
+                    scrollY: 0,
+                    windowWidth: element.scrollWidth 
+                },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait', compress: true },
+                pagebreak:    { mode: ['css', 'legacy'] }
+            };
+
+            const restoreUIState = () => {
+                element.classList.remove('pdf-export-mode');
+                tableWrapper.classList.add('max-h-96');
+                if (exportBtnContainer) {
+                    exportBtnContainer.style.display = '';
+                    exportBtnContainer.removeAttribute('hidden');
+                    exportBtnContainer.classList.remove('hidden');
+                }
+                if (scheduleCard) {
+                    scheduleCard.style.display = '';
+                    scheduleCard.removeAttribute('hidden');
+                    scheduleCard.classList.remove('hidden');
+                    scheduleCard.classList.remove('page-break');
+                }
+            };
+
+            html2pdf().from(element).set(opt).save().then(() => {
+                restoreUIState();
+            }).catch(() => {
+                restoreUIState();
+            });
+        }
+
+        function calculateLoan() {
+            const clientNameInput = document.getElementById('clientName');
+            const clientName = clientNameInput ? clientNameInput.value.trim() : 'Khách hàng';
+
+            const loanAmountEl = document.getElementById('loanAmount');
+            const loanTermEl = document.getElementById('loanTerm');
+            const termUnitEl = document.getElementById('termUnit');
+            const baseRateEl = document.getElementById('baseRate');
+            const discountRateEl = document.getElementById('discountRate');
+            const principalMethodEl = document.getElementById('principalMethod');
+
+            if (!loanAmountEl || !loanTermEl) return;
+
+            const principal = parseCurrency(loanAmountEl.value);
+            const wordEl = document.getElementById('loanAmountWords');
+            if (wordEl) wordEl.innerText = "~ " + numberToWords(principal);
+
+            let termInput = parseInt(loanTermEl.value) || 1;
+            const termUnit = termUnitEl.value;
+            const totalMonths = termUnit === 'years' ? termInput * 12 : termInput;
+
+            const baseMonthlyRate = parseFloat(baseRateEl.value) / 100 / 12;
+            const discountMonthlyRate = parseFloat(discountRateEl.value) / 100 / 12;
+
+            let totalServiceFee = 0;
+            const container = document.getElementById('serviceListContainer');
+            if (container) {
+                const rows = container.children;
+                for (let i = 0; i < rows.length; i++) {
+                    const checkbox = rows[i].querySelector('input[type="checkbox"]');
+                    const feeInput = rows[i].querySelector('input[type="text"]');
+                    if (checkbox && checkbox.checked && feeInput) {
+                        totalServiceFee += parseCurrency(feeInput.value);
+                    }
+                }
+            }
+            const feeDisplay = document.getElementById('totalServiceFeeDisplay');
+            if (feeDisplay) feeDisplay.innerText = formatNumber(totalServiceFee);
+
+            let method = principalMethodEl.value;
+            if (method === 'auto') {
+                if (termUnit === 'years' && termInput > 1) {
+                    method = 'yearly';
+                } else {
+                    method = 'maturity';
+                }
+            }
+
+            let pa1TotalInterest = 0;
+            let pa2TotalInterest = 0;
+            let scheduleHTML = '';
+
+            let remainingPrincipalPA1 = principal;
+            let remainingPrincipalPA2 = principal;
+
+            const numYears = termUnit === 'years' ? termInput : Math.ceil(totalMonths / 12);
+            const principalPerYear = principal / numYears;
+            const monthlyEqualPrincipal = principal / totalMonths;
+
+            for (let m = 1; m <= totalMonths; m++) {
+                let interestPA1 = remainingPrincipalPA1 * baseMonthlyRate;
+                let interestPA2 = remainingPrincipalPA2 * discountMonthlyRate;
+
+                pa1TotalInterest += interestPA1;
+                pa2TotalInterest += interestPA2;
+
+                let currentMonthPrincipal = 0;
+                let noteLabel = "";
+
+                if (method === 'monthly') {
+                    currentMonthPrincipal = monthlyEqualPrincipal;
+                    if (m === totalMonths) currentMonthPrincipal = remainingPrincipalPA1;
+                } else if (method === 'yearly') {
+                    if (m % 12 === 0 && (m / 12) <= numYears) {
+                        currentMonthPrincipal = principalPerYear;
+                        noteLabel = `<span class="text-red-700 font-bold">(Gốc năm ${(m/12)})</span>`;
+                    }
+                } else {
+                    if (m === totalMonths) {
+                        currentMonthPrincipal = principal;
+                        noteLabel = `<span class="text-red-700 font-bold">(Gốc cuối kỳ)</span>`;
+                    }
+                }
+
+                let periodSavings = interestPA1 - interestPA2;
+
+                scheduleHTML += `
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="p-3 font-semibold text-slate-700">Tháng ${m} ${noteLabel}</td>
+                        <td class="p-3 text-slate-600">${formatNumber(currentMonthPrincipal)}</td>
+                        <td class="p-3 text-slate-600">${formatNumber(interestPA1)}</td>
+                        <td class="p-3 text-slate-600">${formatNumber(interestPA2)}</td>
+                        <td class="p-3 text-right font-bold text-emerald-600">+${formatNumber(periodSavings)}</td>
+                    </tr>
+                `;
+
+                if (currentMonthPrincipal > 0) {
+                    remainingPrincipalPA1 -= currentMonthPrincipal;
+                    remainingPrincipalPA2 -= currentMonthPrincipal;
+                }
+            }
+
+            const scheduleBody = document.getElementById('scheduleTableBody');
+            if (scheduleBody) scheduleBody.innerHTML = scheduleHTML;
+
+            const pa1TotalPayment = principal + pa1TotalInterest;
+            const pa2TotalPayment = principal + pa2TotalInterest + totalServiceFee;
+
+            const grossInterestSaved = pa1TotalInterest - pa2TotalInterest;
+            const netSavings = grossInterestSaved - totalServiceFee;
+
+            const r1 = document.getElementById('pa1Rate');
+            if (r1) r1.innerText = baseRateEl.value + "% / năm";
+            
+            const i1 = document.getElementById('pa1TotalInterest');
+            if (i1) i1.innerText = formatNumber(pa1TotalInterest) + " đ";
+            
+            const p1 = document.getElementById('pa1TotalPayment');
+            if (p1) p1.innerText = formatNumber(pa1TotalPayment) + " đ";
+
+            const r2 = document.getElementById('pa2Rate');
+            if (r2) r2.innerText = discountRateEl.value + "% / năm";
+            
+            const i2 = document.getElementById('pa2TotalInterest');
+            if (i2) i2.innerText = formatNumber(pa2TotalInterest) + " đ";
+            
+            const sf2 = document.getElementById('pa2ServiceFee');
+            if (sf2) sf2.innerText = formatNumber(totalServiceFee) + " đ";
+            
+            const p2 = document.getElementById('pa2TotalPayment');
+            if (p2) p2.innerText = formatNumber(pa2TotalPayment) + " đ";
+
+            const savingsBadge = document.getElementById('totalSavingsBadge');
+            const subTitle = document.getElementById('savingsSubtitle');
+            if (savingsBadge) {
+                savingsBadge.innerText = formatNumber(netSavings) + " đ";
+                if (netSavings < 0) {
+                    if (subTitle) subTitle.innerText = "(Tổng phí dịch vụ cao hơn tiền lãi được giảm)";
+                } else {
+                    if (subTitle) subTitle.innerText = "(Đã trừ tổng chi phí dịch vụ kèm theo)";
+                }
+            }
+        }
+
+        window.onload = function() {
+            const today = new Date();
+            const dateStr = "Ngày " + today.getDate().toString().padStart(2, '0') + "/" + (today.getMonth() + 1).toString().padStart(2, '0') + "/" + today.getFullYear();
+            const badge = document.getElementById('currentDateBadge');
+            if (badge) badge.innerText = dateStr;
+
+            calculateLoan();
+        };
+    </script>
+</body>
+</html>
